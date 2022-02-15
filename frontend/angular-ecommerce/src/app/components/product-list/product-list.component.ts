@@ -131,4 +131,9 @@ updatePageSize(pageSize: number){
   this.listProducts();
 }
 
+addToCart(theProduct: Product){
+
+  console.log('Product: '+theProduct.name +' Price: '+theProduct.unitPrice);
+}
+
 }
