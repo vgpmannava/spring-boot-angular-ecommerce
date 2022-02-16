@@ -46,6 +46,35 @@ export class CartService {
     this.computeCartTotals();
   }
   computeCartTotals() {
-    throw new Error('Method not implemented.');
+    
+    let totalPriceValue: number = 0;
+    let totalQuantityValue: number = 0;
+
+    for(let eachCartItem of this.cartItems){
+
+      totalPriceValue += eachCartItem.quantity * eachCartItem.unitPrice;
+      totalQuantityValue += eachCartItem.quantity;
+    }
+
+    // publish the new values... all the subscribers will receive the new data
+    this.totalPrice.next(totalPriceValue);
+    this.totalQuantity.next(totalQuantityValue);    
+
+    // log data for debuggin purpsose
+    this.logCartData(totalPriceValue, totalQuantityValue);
+  }
+
+  logCartData(totalPriceValue: number, totalQuantityValue: number) {
+    
+    console.log('Contents of the cart');
+    for(let tempCartItem of this.cartItems){
+
+      const subTotalPrice = tempCartItem.quantity * tempCartItem.unitPrice;
+      console.log(`name=${tempCartItem.name}, quantity=${tempCartItem.quantity}, price=${tempCartItem.unitPrice}, subTotal=${subTotalPrice}`);
+    }
+
+    console.log(`Total Price = ${totalPriceValue.toFixed(2)}, Total Quantity= ${totalQuantityValue}`);
+    console.log('-----');
+
   }
 }
