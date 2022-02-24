@@ -82,4 +82,32 @@ export class CartService {
     console.log('-----');
 
   }
+
+  decrementQuantity(theCartItem: CartItem) {
+
+    theCartItem.quantity--;
+
+    if(theCartItem.quantity == 0){
+      this.remove(theCartItem);
+    } else{
+      this,this.computeCartTotals();
+    }
+    
+  }
+  remove(theCartItem: CartItem) {
+    
+    // find the index of item in the cartItems array
+    const cartItemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.id === theCartItem.id);
+
+    // If not found the index will be -1. If found index will be greater than 1
+    // if found, remove the item from the array at given index
+    if(cartItemIndex > -1){
+      this.cartItems.splice(cartItemIndex, 1);
+
+      this.computeCartTotals();
+    }
+    
+
+
+  }
 }
