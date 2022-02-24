@@ -57,10 +57,12 @@
                     <p>Total Quantity: {{ totalQuantity }}</p>
                     <p>Sipping: Free</p>
                     <p>Total Price: {{ totalPrice }}</p>
+                    <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
                 </td> 
              </tr>
           </tbody>
         </table>
+
         </div>
 
         <div *ngIf="cartItems.length == 0" class="alert alert-warning col-md-12" role="alert">
