@@ -13,10 +13,11 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="firstName" type="text">
-                                 <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
-                                              class="alert alert-danger mt-2">
+                                 
+                                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                                              class="alert alert-danger mt-1">
                                               
-                                    <div *ngIf="firstName?.errors?.['required']">
+                                    <div *ngIf="firstName.errors?.['required'] || firstName.errors?.['notOnlyWhiteSpace']">
                                         First Name is required
                                     </div>
 
@@ -33,6 +34,19 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="lastName" type="text">
+
+                                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+                                              class="alert alert-danger mt-1">
+                                              
+                                    <div *ngIf="lastName.errors?.['required']  || lastName.errors?.['notOnlyWhiteSpace']">
+                                        Last Name is required
+                                    </div>
+
+                                    <div *ngIf="lastName.errors?.['minLength']">
+                                        Last Name must be at least  characters
+                                    </div>
+                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -42,6 +56,16 @@
                         <div class="col-md-9">
                             <div class="input-space">
                                 <input formControlName="email" type="text">
+
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" 
+                                             class="mt-1 alert alert-danger">
+                                    <div *ngIf="email.errors?.['required']">
+                                        Email is required
+                                    </div>
+                                    <div *ngIf="email.errors?.['pattern']">
+                                        Email must be valid
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
